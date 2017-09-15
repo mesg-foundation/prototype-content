@@ -24,8 +24,37 @@ With all that in mind we decided to create some tools to fix those problems
 
 ### Ethereum Blockchain Contract Management
 
+The first tool is to manage your smart contracts. When you create a smart contract you have no places to get all the informations about it except your codebase but you will not have your deployed adress on your codebase usually so it can be a bit messy to know what addresses your contracts are deployed to.
+
+When you access to Etherstellar dashboard you can now have access to all the contracts you deployed and you can also add some contract you are interested in even you are not the one developing it, this can be really usefull if you want to use thoses contracts.
+
+On this dashboard you will be able to do more than just store your contracts with the associated addresses, you can in a simple click access to the the [etherscan](https://etherscan.io) data and more important, have the details of your contracts.
+
+This dashboard also comes with a view of all your contract data and functions and can act as a documentation to share the knowledge to your team in a single place.
+
+#### Constructor
+
+Display the constructor of your contract to remind you all the arguments to create this contract and remind you that you have to test that this constructor can be called only one time
+
+#### Constants
+
+Check all the available data of your contract and see the actual value, we connect to the blockchain for you and you can see the value of your contract data just in the dashboard with nothing else to do
+
+#### Events
+
+List all the events of your contract. An event is a emitted directly by your contract to notify some informations. From the dashboard you can so see all the data your contract emit and you will be able to connect any actions to this event (more details in the **Ethereum Blockchain Real Time Actions/Notification** section)
+
+#### Functions
+
+Visualize all the functions of your contract, all the arguments to call it and what this function returns. When you work with some contract created by someone else (teammate, open source contract or an already deployed contract) this is really usefull to have a clear idea of what this contract can do and how.
+
+Also from any function you will be able to create a specific private API endpoint that will sign your transaction for you and execute the function and you don't have to worry to connect to the blockchain and do this yourself (more details on **Ethereum Blockchain Transactions** section)
+
 ### Ethereum Blockchain Real Time Actions/Notification
 
 ### Ethereum Blockchain Transactions
 
 ### Ethereum Contract Marketplace
+
+### Etherstellar CLI
+can create triggers directly from command line, run them, log etc...
