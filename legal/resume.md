@@ -50,7 +50,7 @@ Visualize all the functions of your contract, all the arguments to call it and w
 
 Also from any function you will be able to create a specific private API endpoint that will sign your transaction for you and execute the function and you don't have to worry to connect to the blockchain and do this yourself (more details on **Blockchain Transactions** section)
 
-### Blockchain Real Time Actions/Notification
+### Blockchain Real Time Actions
 
 Based on the Ethereum contracts we offer the possibility to connect your contract events to any actions you needs for your applications. On Ethereum, when a contract function is called, this function can (if written in the source code) emit some events. Thoses events are really usefuls and will send some parameters defined by the developer of the contract.
 
