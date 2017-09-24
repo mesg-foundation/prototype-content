@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this document we will present Etherstellar, a echosystem of tools to create and manage all your application related to the Ethereum blockchain.
+In this document we will present Etherstellar, a ecosystem of tools to create and manage all your application related to the Ethereum blockchain.
 
 Blockchain technology is now more than ever a really important and future-proof technology. Before Bitcoin this technology has been used for a single purpose, finance. Ethereum blockchain brings some new advantages and allow people to code "smart contracts" on the blockchain and this opened the door to millions of possibilities.
 
