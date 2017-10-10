@@ -8,3 +8,7 @@ Our product is to create the possibility to interact with different blockchains 
 - Interconnected Blockchain 
 - Chaine overlap
 - Blockchaining
+- Chainsly
+
+
+ideas here https://www.brandbucket.com/names/search=blockchain
