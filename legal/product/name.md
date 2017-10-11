@@ -18,6 +18,7 @@ Our product is to create the possibility to interact with different blockchains 
 - [goconnections](https://www.brandbucket.com/goconnections)
 - [networkee](https://www.brandbucket.com/networkee)
 - [networkize](https://www.brandbucket.com/networkize)
+- blockchaintransition (to keep the idea that this product will help for the transition of full centralized internet to full decentralized internet)
 
 
 ideas here https://www.brandbucket.com/names/search=blockchain
