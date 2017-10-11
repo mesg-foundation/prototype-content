@@ -8,7 +8,16 @@ Our product is to create the possibility to interact with different blockchains 
 - Interconnected Blockchain 
 - Chaine overlap
 - Blockchaining
-- Chainsly
+- [Chainsly](https://www.brandbucket.com/chainsly)
+- [linksmartly](https://www.brandbucket.com/linksmartly)
+- [blockovia](https://www.brandbucket.com/blockovia)
+- [connectingg](https://www.brandbucket.com/connectingg)
+- [linkdriven](https://www.brandbucket.com/linkdriven)
+- [stackconnect](https://www.brandbucket.com/stackconnect)
+- [connectstack](https://www.brandbucket.com/connectstack)
+- [goconnections](https://www.brandbucket.com/goconnections)
+- [networkee](https://www.brandbucket.com/networkee)
+- [networkize](https://www.brandbucket.com/networkize)
 
 
 ideas here https://www.brandbucket.com/names/search=blockchain
