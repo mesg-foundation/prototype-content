@@ -19,6 +19,8 @@ Our product is to create the possibility to interact with different blockchains 
 - [networkee](https://www.brandbucket.com/networkee)
 - [networkize](https://www.brandbucket.com/networkize)
 - blockchaintransition (to keep the idea that this product will help for the transition of full centralized internet to full decentralized internet)
+- [connect-the-blockchain.com](https://www.godaddy.com/domains/searchresults.aspx?checkAvail=1&tmskey=&domainToCheck=connect-the-blockchain.com)
+- [blockchain-connect](https://www.godaddy.com/domains/searchresults.aspx?checkAvail=1&tmskey=&domainToCheck=blockchain-connect.com)
 
 
 ideas here https://www.brandbucket.com/names/search=blockchain
