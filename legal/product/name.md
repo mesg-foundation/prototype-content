@@ -23,5 +23,7 @@ Our product is to create the possibility to interact with different blockchains 
 - [blockchain-connect](https://www.godaddy.com/domains/searchresults.aspx?checkAvail=1&tmskey=&domainToCheck=blockchain-connect.com)
 - ethereum-worflow
 - workflow-ethereum
+- offchain-processing 
+- blockchain-event
 
 ideas here https://www.brandbucket.com/names/search=blockchain
