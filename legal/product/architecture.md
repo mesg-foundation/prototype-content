@@ -99,7 +99,7 @@ augur-transfer-after-12-oct-with-more-than-10-token:
         include: 134014335782478591349648913289461...
     - executedAt:
         gt: '2017-10-12T00:00:00.000Z'
-    - args.Amount:
+    - arguments.Amount:
         gt: 10
   service:
     service: webhook
