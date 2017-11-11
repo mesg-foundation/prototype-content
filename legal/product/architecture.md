@@ -37,7 +37,7 @@ connectorX:
     type: ETHEREUM_MAINNET_CONTRACT
     propagation: all | none # the connector will be propagated and possibly executed for every computer of the network
     private: true | false # the connector will be private, nobody will be able to connect it except the creator of the connector or anyone he gives access to
-    data:
+    outputs:
         from: String
         to: String
         transactionId: String
@@ -66,7 +66,7 @@ serviceX:
     title: Webhook
     propagation: all | none # the service will be propagated and possibly executed for every computer of the network
     private: true | false # this service will be private, nobody will be able to connect it except the creator of the service or anyone he gives access to
-    data:
+    inputs:
         arguments: JSON
         endpoint: String
         headers:
