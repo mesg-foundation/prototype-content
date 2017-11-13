@@ -1,4 +1,4 @@
-The idea is to work on the architecture to have something more flexible to be able to switch to full decentralised in the futur and easier to maintain and evolve.
+The idea is to have an architecture that is flexible enough to be able to switch to full decentralised in the futur and easier to maintain and evolve.
 
 ## Parts
 
