@@ -43,49 +43,44 @@ Everytime the connector receive an event it should convert it in data that the d
 
 One exemple of configuration for a connector file could be like that 
 ```yml
-connectorX:
-    type: ETHEREUM_MAINNET_CONTRACT
-    propagation: all | none # the connector will be propagated and possibly executed for every computer of the network
-    private: true | false # the connector will be private, nobody will be able to connect it except the creator of the connector or anyone he gives access to
-    outputs:
-        from: String
-        to: String
-        transactionId: String
-        fees: Int
-        logs:
-            - String
-        executedAt: Datetime
-        arguments: JSON
-    run: # docker compose file or maybe just a command line
-        version: '2'
-        services:
-            app:
-                image: https://repository.etherstellar.com/ethereum-mainnet-contract
-                link:
-                    - ethereum-node
-            ethereum-node:
-                image: parity/parity
+type: ETHEREUM_MAINNET_CONTRACT
+propagation: all | none # the connector will be propagated and possibly executed for every computer of the network
+private: true | false # the connector will be private, nobody will be able to connect it except the creator of the connector or anyone he gives access to
+outputs:
+    from: String
+    to: String
+    transactionId: String
+    fees: Int
+    logs:
+        - String
+    executedAt: Datetime
+    arguments: JSON
+run: # docker compose file or maybe just a command line
+    version: '2'
+    services:
+        app:
+            image: https://repository.etherstellar.com/ethereum-mainnet-contract
+            link:
+                - ethereum-node
+        ethereum-node:
+            image: parity/parity
 ```
 
-## Runner/Service
+## Runner
 
-The runner will need to listen some events from the dispatcher and need to be able to be written in any language. For that docker will be again used. The runner will have the possibility to run one service (or multiple) and service will need to specify what kind of data they need to be able to process the event they will receive. This will be usefull to be able to connect an event from a connector to a service. If the connector define all the data it send and the service all the data it needs we can match and connect them.
+The runner will need to listen some events from the dispatcher and will be written in Javascript for start but can be extended to any languages. For that docker will be again used, we will provide a docker image "runner" that can automatically register to the dispatcher and then receive the list of service it needs to run. Once it knows all the services it will fetch the source code of every services. The runner will have the possibility to run one service (or multiple) and service will need to specify what kind of data they need to be able to process the event they will receive. This will be usefull to be able to connect an event from a connector to a service. If the connector define all the data it send and the service all the data it needs we can match and connect them.
 One service definition could be something like that:
 ```yml
-serviceX:
-    title: Webhook
-    propagation: all | none # the service will be propagated and possibly executed for every computer of the network
-    private: true | false # this service will be private, nobody will be able to connect it except the creator of the service or anyone he gives access to
-    inputs:
-        arguments: JSON
-        endpoint: String
-        headers:
-            - key: String
-              value: String
-    run:
-        version: '2'
-        app:
-            image: https://repository.etherstellar.com/service-webhook
+title: Webhook
+propagation: all | none # the service will be propagated and possibly executed for every computer of the network
+private: true | false # this service will be private, nobody will be able to connect it except the creator of the service or anyone he gives access to
+inputs:
+    arguments: JSON
+    endpoint: String
+    headers:
+        - key: String
+            value: String
+handler: index.js
 ```
 
 ## The config for the triggers
