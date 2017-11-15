@@ -18,6 +18,8 @@ As communication system we can use [RabbitMQ](https://www.rabbitmq.com) which is
 - Receive actions from the dispatcher and send them to the connector (like decode some parameters for exemple)
 - Unregister the connector to the dispatcher when needed
 
+![connect sequence diagram](./connector.sequence.svg)
+
 There is two ways to do that:
 
 #### Docker in Docker
