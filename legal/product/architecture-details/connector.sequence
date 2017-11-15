@@ -13,6 +13,6 @@ Q ~> A : notify event
 A -> D : get the matching triggers
 D ~> A : triggers
 A -> A : Filter evt from triggers
-A -> D : notify event if match at least one trigger
+A -> D : notify event if match a trigger
 A -> D : unregister connector
 ```

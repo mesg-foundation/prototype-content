@@ -91,7 +91,7 @@
 <text transform="translate(0.19069,-3.174) scale(1,-1) scale(0.0069444) " font-family="Helvetica,sans-serif" font-size="20px" stroke="none" fill="black" > </text>
 <line x1="0.21" y1="-3.25" x2="5.74" y2="-3.25" stroke-width="0.0094118" />
 <polygon points="5.64,-3.225 5.74,-3.25 5.64,-3.275 " stroke-width="0.0094118" fill="black" />
-<text transform="translate(1.763,-3.2157) scale(1,-1) scale(0.0069444) " font-family="Helvetica,sans-serif" font-size="20px" stroke="none" fill="black" >notify event if match at least one trigger</text>
+<text transform="translate(2.0834,-3.2157) scale(1,-1) scale(0.0069444) " font-family="Helvetica,sans-serif" font-size="20px" stroke="none" fill="black" >notify event if match a trigger</text>
 <text transform="translate(2.9557,-3.3824) scale(1,-1) scale(0.0069444) " font-family="Helvetica,sans-serif" font-size="20px" stroke="none" fill="black" > </text>
 <line x1="5.8" y1="-2.5" x2="5.8" y2="-3.25" stroke-width="0.0094118" stroke-dasharray="0.05, 0.05"/>
 <line x1="5.75" y1="-3.25" x2="5.85" y2="-3.25" stroke-width="0.0094118" />
