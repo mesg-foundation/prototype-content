@@ -1,0 +1,10 @@
+#!/usr/bin/env ruby
+
+require 'markdoc'
+
+puts "Generate diagrams"
+
+Dir["**/*.sequence"].each do |file|
+  svg = Markdoc::Sequence.draw File.read file
+  File.write "#{file}.svg", svg
+end

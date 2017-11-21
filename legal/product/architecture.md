@@ -1,29 +1,39 @@
-The idea is to work on the infrastructure to have something more flexible to switch in full decentralised in the futur and something easier to maintain and evolve.
+The idea is to have an architecture that is flexible enough to be able to switch to full decentralised in the futur and easier to maintain and evolve.
 
-As discussed we have 3 main parts on the project:
+## Parts
 
-- **Connector**: This is the part in charge of listening some event from any source we need, we can listen for Ethereum transactions, Ethereum contract, Neo transactions or even a HTTP event or Redis or whatever. Those connectors will be developed by us but also by the community and every connector will receive a reward when it's event is processed
+- **Connector**: This is the part in charge of listening events from any source (eg:  Ethereum transactions, Ethereum contract, Neo transactions, HTTP event, Redis, etc.) and send them to the **dispatcher**. The goal is to have multiple connectors that are listening from the same source in order not to really on a single point of connection. Each individual will be able to run a connector on its computer (like miner). Every connector will receive a reward when its event is processed by the rest of the system. Those connectors will be developed by developers who will receive a reward when its connector is used (even if he doesn't run the actual connector on its own computer).
 
-- **Runner**: The runner is an instance of code that is executed in a specific context on any computed. This will have the responsibility to execute the service the user want to run, exemple call a webhook, write the event in a database or even trigger a transaction on a blockchain. For every execution the runner will receive a reward.
+- **Runner**: This is the part in charge of executing the event's action that the **dispatcher** will send. The runner will be able to execute a lot of different **services**. Each individual will be able to run a runner on its computer (like miner) and will receive a reward when used.
 
-- **Dispatcher**: The dispatcher will be in charge to receive all the events from the different **connectors**, then select one. Once the connector is selected and verified, it will match all the configurations that match this specific event and select a **runner** to execute the action. From the result of this action, the dispatcher will send a reward to the selected connector and the selected runner (maybe also a small reward to every others tiers that were participating but didn't get choose). The rewarding is not necessarily done for every event processed and can be done at the end of the day or the month etcc... When all this is done it will log the result of all this somewhere to be able to replay everything that happen.
+- **Dispatcher**: The dispatcher will be in charge to receive all the events from the different **connectors**. The dispatcher will match events against existing **triggers** and select **runners** to execute the actions. From the result of these actions, the dispatcher will send a reward to the connectors that provided the events and to the runners that executed the actions from the user's balance and also to itself. When all of this is done, the dispatcher will save the logs and the result of the execution.
+
+- **Service**: The service is a specific piece of code that will execute an action from an event on a runner. For example, post to an HTTP endpoint, send an email, save in a database, etc. The services will be developed by developers who will receive a reward when its service is used (even if he doesn't run the actual runner on its own computer).
+
+- **Trigger**: The trigger is a configuration users provide in order to connect a connector's events to a specific service and thus executing action from events.
 
 
-The worflow will be as follow:
+## Workflow
 
-- Event from the connector
-- Send the event through one protocol (http, p2p, amqp, ...)
-- The dispatcher receive the event(s)
-- The dispatcher check if the/which event is valid
-- The dispatcher get all the matching config for this event
-- The dispatcher ask the event provider (connector) to decode the event with the config retrieve
-- The dispatcher select a runner that can execute the action in the config
-- The dispatcher send the event + some configuration to the runner
-- The runner execute the correct service and return the logs
-- The dispatcher save the result of this execution
-- The dispatcher calculate the price of the execution
-- The dispatcher reward the connecter (or maybe all)
-- The dispatcher reward the service (or maybe all)
+- The user provides tokens to the dispatcher to be used to pay futur executions
+- The user creates a trigger with that uses a connector and a service
+- The connector receives a event
+- The connector sends the event to the dispatcher
+- The dispatcher receives the event
+- The dispatcher matchs the event against existing triggers
+- If no trigger matchs the event, stop execution
+- [optional] The dispatcher asks the connector to decode the event with the trigger's data (in the case of Ethereum Contract, we need to decode the event with the contract ABI)
+- The dispatcher selects one runner that can execute the trigger's service
+- The dispatcher sends the event + trigger's data to the selected runner
+- The runner executes the service set in the trigger
+- The runner sends the execution's logs and result to the dispatcher
+- The dispatcher saves the logs and result of this execution
+- The dispatcher calculates the price of the execution
+- The dispatcher rewards the connector from the user's tokens
+- The dispatcher rewards the connector's developer from the user's tokens
+- The dispatcher rewards the service from the user's tokens
+- The dispatcher rewards the service's developer from the user's tokens
+- The dispatcher rewards itself from the user's tokens
 
 
 ## Connectors
@@ -33,49 +43,44 @@ Everytime the connector receive an event it should convert it in data that the d
 
 One exemple of configuration for a connector file could be like that 
 ```yml
-connectorX:
-    type: ETHEREUM_MAINNET_CONTRACT
-    propagation: all | none # the connector will be propagated and possibly executed for every computer of the network
-    private: true | false # the connector will be private, nobody will be able to connect it except the creator of the connector or anyone he gives access to
-    outputs:
-        from: String
-        to: String
-        transactionId: String
-        fees: Int
-        logs:
-            - String
-        executedAt: Datetime
-        arguments: JSON
-    run: # docker compose file or maybe just a command line
-        version: '2'
-        services:
-            app:
-                image: https://repository.etherstellar.com/ethereum-mainnet-contract
-                link:
-                    - ethereum-node
-            ethereum-node:
-                image: parity/parity
+type: ETHEREUM_MAINNET_CONTRACT
+propagation: all | none # the connector will be propagated and possibly executed for every computer of the network
+private: true | false # the connector will be private, nobody will be able to connect it except the creator of the connector or anyone he gives access to
+outputs:
+    from: String
+    to: String
+    transactionId: String
+    fees: Int
+    logs:
+        - String
+    executedAt: Datetime
+    arguments: JSON
+run: # docker compose file or maybe just a command line
+    version: '2'
+    services:
+        app:
+            image: https://repository.etherstellar.com/ethereum-mainnet-contract
+            link:
+                - ethereum-node
+        ethereum-node:
+            image: parity/parity
 ```
 
-## Runner/Service
+## Runner
 
-The runner will need to listen some events from the dispatcher and need to be able to be written in any language. For that docker will be again used. The runner will have the possibility to run one service (or multiple) and service will need to specify what kind of data they need to be able to process the event they will receive. This will be usefull to be able to connect an event from a connector to a service. If the connector define all the data it send and the service all the data it needs we can match and connect them.
+The runner will need to listen some events from the dispatcher and will be written in Javascript for start but can be extended to any languages. For that docker will be again used, we will provide a docker image "runner" that can automatically register to the dispatcher and then receive the list of service it needs to run. Once it knows all the services it will fetch the source code of every services. The runner will have the possibility to run one service (or multiple) and service will need to specify what kind of data they need to be able to process the event they will receive. This will be usefull to be able to connect an event from a connector to a service. If the connector define all the data it send and the service all the data it needs we can match and connect them.
 One service definition could be something like that:
 ```yml
-serviceX:
-    title: Webhook
-    propagation: all | none # the service will be propagated and possibly executed for every computer of the network
-    private: true | false # this service will be private, nobody will be able to connect it except the creator of the service or anyone he gives access to
-    inputs:
-        arguments: JSON
-        endpoint: String
-        headers:
-            - key: String
-              value: String
-    run:
-        version: '2'
-        app:
-            image: https://repository.etherstellar.com/service-webhook
+title: Webhook
+propagation: all | none # the service will be propagated and possibly executed for every computer of the network
+private: true | false # this service will be private, nobody will be able to connect it except the creator of the service or anyone he gives access to
+inputs:
+    arguments: JSON
+    endpoint: String
+    headers:
+        - key: String
+            value: String
+handler: index.js
 ```
 
 ## The config for the triggers

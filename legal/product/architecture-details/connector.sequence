@@ -1,0 +1,18 @@
+```sequence
+A = Actor
+Q = Queue system
+C = Connector
+D = Dispatcher
+
+A -> Q : create channel
+A -> D : register connector
+A -> C : start
+C -> C : waiting for events
+C ~> Q : notify event
+Q ~> A : notify event
+A -> D : get the matching triggers
+D ~> A : triggers
+A -> A : Filter evt from triggers
+A -> D : notify event if match a trigger
+A -> D : unregister connector
+```
