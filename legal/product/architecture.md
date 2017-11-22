@@ -35,6 +35,19 @@ The idea is to have an architecture that is flexible enough to be able to switch
 - The dispatcher rewards the service's developer from the user's tokens
 - The dispatcher rewards itself from the user's tokens
 
+## Distributed network
+
+Connectors and runners are easily runable by anyone who wants to participate to the network. A proof of stake system will prevent people to try to cheat with the network.
+
+An event is considered valid when a minimum percent of the network's connectors send the same event to the dispatcher. All connectors that are too slow are discarded. The faster a connector is, higher the reward will be.
+
+Runners are tested by the dispatcher by sending "test" execution. If the runner failed to execute it or modify in any way the data, it will be discarded. As the dispatcher choose the runner, a fast and reliable runner will receive more reward than a slow.
+
+## Token
+
+All part of the network will get reward based on their speed, realibity and computation time/power.
+Also, we could let the user choose the price per "gas" he is ready to pay in order to prioritize its event (maybe its not super fair..)
+
 
 ## Connectors
 
